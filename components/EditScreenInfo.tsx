@@ -1,14 +1,19 @@
 import * as WebBrowser from 'expo-web-browser';
 import React from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import {Button, StyleSheet, TouchableOpacity} from 'react-native';
 
 import Colors from '../constants/Colors';
 import { MonoText } from './StyledText';
 import { Text, View } from './Themed';
+import skyScannerApi from "../service/SkyScannerApi";
 
 export default function EditScreenInfo({ path }: { path: string }) {
+  const getData = () =>skyScannerApi.getData('').then(r =>   console.log(r))
+
+
   return (
     <View>
+      <Button title={'GetData'} onPress={getData}/>
       <View style={styles.getStartedContainer}>
         <Text
           style={styles.getStartedText}

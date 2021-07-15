@@ -7,6 +7,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useColorScheme } from './hooks/useColorScheme';
 import { useLoadedAssets } from './hooks/useLoadedAssets';
 import Navigation from './navigation';
+import {Text} from "react-native";
 
 export default function App() {
   const isLoadingComplete = useLoadedAssets();
@@ -17,8 +18,8 @@ export default function App() {
   } else {
     return (
       <SafeAreaProvider>
+        <Text style={{textAlign: 'center', marginTop: '10%'}} >Flights</Text>
         <Navigation colorScheme={colorScheme} />
-        <StatusBar />
       </SafeAreaProvider>
     );
   }
