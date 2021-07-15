@@ -8,7 +8,10 @@ import { Text, View } from './Themed';
 import skyScannerApi from "../service/SkyScannerApi";
 
 export default function EditScreenInfo({ path }: { path: string }) {
-  const getData = () =>skyScannerApi.getData('').then(r =>   console.log(r))
+  const getDay = new Date()
+  const date = getDay.getFullYear() + '-' + (getDay.getMonth()+1) + '-' + getDay.getDate()
+  console.log(date)
+  const getData = () => skyScannerApi.getData(`${date}/`).then(r =>   console.log(r))
 
 
   return (

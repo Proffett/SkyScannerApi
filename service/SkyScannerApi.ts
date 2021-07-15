@@ -1,4 +1,4 @@
-const BASE_URL = 'https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/reference/v1.0/countries/en-US';
+const BASE_URL = 'https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/RU/RUB/en-GB/SVO/JFK/';
 
 class SkyScannerApi {
     readonly baseUrl: string;
