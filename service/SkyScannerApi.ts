@@ -41,7 +41,7 @@ class SkyScannerApi {
     }
 
     public async getData(url: string, options?: { headers?: HeadersInit }) {
-        return this.get(url, options).then((response) => response);
+        return this.get(url, options).then((response) => response.json());
     }
 }
 
