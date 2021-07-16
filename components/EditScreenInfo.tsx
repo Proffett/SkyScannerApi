@@ -1,61 +1,43 @@
-import * as WebBrowser from 'expo-web-browser';
 import React from 'react';
-import {Button, StyleSheet, TouchableOpacity} from 'react-native';
+import {Button, StyleSheet} from 'react-native';
 
-import Colors from '../constants/Colors';
-import { MonoText } from './StyledText';
 import { Text, View } from './Themed';
 import skyScannerApi from "../service/SkyScannerApi";
 
+
 export default function EditScreenInfo({ path }: { path: string }) {
   const getDay = new Date()
-  const date = getDay.getFullYear() + '-' + (getDay.getMonth()+1) + '-' + getDay.getDate()
-  console.log(date)
-  const getData = () => skyScannerApi.getData(`${date}/`).then(r =>   console.log(r))
+  const date = getDay.getFullYear() + '-' + '0'+(getDay.getMonth()+1) + '-' + getDay.getDate()
+  let data = {}
+
+  const getData = () => skyScannerApi.getData(`${date}`).then((res) => {
+    console.log(res)
+    console.log(data)
+  })
+
+
+  const Item = ({ title }) => (
+      <View style={styles.item}>
+        <Text style={styles.title}>{title}</Text>
+      </View>
+  );
+
 
 
   return (
     <View>
       <Button title={'GetData'} onPress={getData}/>
       <View style={styles.getStartedContainer}>
-        <Text
-          style={styles.getStartedText}
-          lightColor="rgba(0,0,0,0.8)"
-          darkColor="rgba(255,255,255,0.8)">
-          Open up the code for this screen:
-        </Text>
 
-        <View
-          style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
-          darkColor="rgba(255,255,255,0.05)"
-          lightColor="rgba(0,0,0,0.05)">
-          <MonoText>{path}</MonoText>
-        </View>
+       <Text>s</Text>
 
-        <Text
-          style={styles.getStartedText}
-          lightColor="rgba(0,0,0,0.8)"
-          darkColor="rgba(255,255,255,0.8)">
-          Change any of the text, save the file, and your app will automatically update.
-        </Text>
       </View>
 
-      <View style={styles.helpContainer}>
-        <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-          <Text style={styles.helpLinkText} lightColor={Colors.light.tint}>
-            Tap here if your app doesn't automatically update after making changes
-          </Text>
-        </TouchableOpacity>
-      </View>
+
     </View>
   );
 }
 
-function handleHelpPress() {
-  WebBrowser.openBrowserAsync(
-    'https://docs.expo.io/get-started/create-a-new-app/#opening-the-app-on-your-phonetablet'
-  );
-}
 
 const styles = StyleSheet.create({
   getStartedContainer: {
@@ -85,4 +67,12 @@ const styles = StyleSheet.create({
   helpLinkText: {
     textAlign: 'center',
   },
+  item: {
+    backgroundColor: "#f9c2ff",
+    padding: 20,
+    marginVertical: 8
+  },
+  title: {
+    fontSize: 24
+  }
 });

@@ -1,4 +1,4 @@
-const BASE_URL = 'https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/RU/RUB/en-GB/SVO/JFK/';
+const BASE_URL = 'https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsedates/v1.0/RU/RUB/en-US/SVO-sky/JFK-sky';
 
 class SkyScannerApi {
     readonly baseUrl: string;
@@ -8,9 +8,9 @@ class SkyScannerApi {
     constructor(options: { baseUrl: string }) {
         this.baseUrl = options.baseUrl;
         this.defaultHeaders = {
-            'x-rapidapi-key': '1a51e5e2cfmshc6c7f35838d233fp14da76jsn4174cd75d768',
-            "x-rapidapi-host": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
-            'Content-Type': 'application/json; charset=utf-8',
+            'x-rapidapi-key': 'de24ccb21dmshd84ce6669053dfep178518jsnce232c3dea79',
+            "x-rapidapi-host": 'skyscanner-skyscanner-flight-search-v1.p.rapidapi.com',
+
         };
     }
 
@@ -41,7 +41,7 @@ class SkyScannerApi {
     }
 
     public async getData(url: string, options?: { headers?: HeadersInit }) {
-        return this.get(url, options).then((response) => response.json());
+        return this.get(url, options).then((response) => response);
     }
 }
 
