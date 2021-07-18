@@ -1,14 +1,17 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import {ScrollView, StyleSheet} from 'react-native';
 
-import EditScreenInfo from '../components/EditScreenInfo';
+import BrowseScreenInfo from '../components/BrowseScreenInfo';
 import { View } from '../components/Themed';
 
 export default function BrowseScreen() {
   return (
-    <View style={styles.container}>
-      <EditScreenInfo path="/screens/BrowseScreen.tsx" />
-    </View>
+      <ScrollView>
+        <View style={styles.container}>
+          <BrowseScreenInfo path="/screens/BrowseScreen.tsx" />
+        </View>
+      </ScrollView>
+
   );
 }
 

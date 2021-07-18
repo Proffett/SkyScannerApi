@@ -1,14 +1,20 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import {ScrollView, StyleSheet, TouchableOpacity} from 'react-native';
 
-import EditScreenInfo from '../components/EditScreenInfo';
 import { View } from '../components/Themed';
+import FavoritesScreenInfo from "../components/FavoritesScreenInfo";
 
 export default function FavouritesScreen() {
   return (
-    <View style={styles.container}>
-      <EditScreenInfo path="/screens/FavouritesScreen.tsx" />
-    </View>
+      <ScrollView>
+        <View style={styles.container}>
+
+          <TouchableOpacity>
+            <FavoritesScreenInfo path="/screens/FavouritesScreen.tsx" />
+          </TouchableOpacity>
+
+        </View>
+      </ScrollView>
   );
 }
 

@@ -7,6 +7,8 @@ import { useColorScheme } from './hooks/useColorScheme';
 import { useLoadedAssets } from './hooks/useLoadedAssets';
 import Navigation from './navigation';
 import {Text} from "react-native";
+import {Provider} from "react-redux";
+import store from "./redux/store";
 
 export default function App() {
   const isLoadingComplete = useLoadedAssets();
@@ -16,10 +18,12 @@ export default function App() {
     return null;
   } else {
     return (
-      <SafeAreaProvider>
-        <Text style={{textAlign: 'center', marginTop: '10%'}} >Flights</Text>
-        <Navigation colorScheme={colorScheme} />
-      </SafeAreaProvider>
+        <Provider store={store}>
+          <SafeAreaProvider>
+              <Text style={{position:"relative", textAlign: 'center', marginTop: 45}} >Flights</Text>
+              <Navigation colorScheme={colorScheme} />
+          </SafeAreaProvider>
+        </Provider>
     );
   }
 }
