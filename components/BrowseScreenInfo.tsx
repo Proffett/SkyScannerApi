@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginHorizontal: 5,
     marginVertical: 20,
-    color: '#fff',
+    color: '#fff'
   },
   homeScreenFilename: {
     marginVertical: 7,

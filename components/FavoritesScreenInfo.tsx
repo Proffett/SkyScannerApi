@@ -21,8 +21,10 @@ export default function FavoritesScreenInfo({ path }: { path: string }) {
       return(
           <TouchableOpacity onPress={() => navigation.navigate('FlightScreen',
               {id: id, price: item.MinPrice, date: item.QuoteDateTime  })} key={id}>
-            <View style={{maxWidth: 335, maxHeight: 135, alignItems: "center", flexWrap: "wrap",
-              flex: 1, flexDirection: 'row',  padding: 19, marginBottom: 20, borderColor: '#eee', borderStyle: "solid", borderWidth: 1, borderRadius: 6, elevation: 6}}>
+
+            <View style={{maxWidth: 335, maxHeight: 135, alignItems: "center", flexWrap: "wrap", flex: 1,
+              flexDirection: 'row',  padding: 19, marginBottom: 30, borderColor: '#eee',
+              borderStyle: "solid", borderWidth: 1, borderRadius: 6, elevation: 6}}>
               <View style={{position: "absolute", right: 13, top: 15}} >
                 <TouchableHighlight onPress={()=> touchFavorites(id)} >
                   <Image source={require("../assets/images/favorRed.png")} />
@@ -62,7 +64,7 @@ export default function FavoritesScreenInfo({ path }: { path: string }) {
   return (
     <View>
       <View style={styles.getStartedContainer}>
-        {favoritesFlights ? favoritesFlights.map((item) => RenderFlight(item, item.QuoteId)) : <Text>Не найдено</Text>}
+        {favoritesFlights ? favoritesFlights.map((item) => RenderFlight(item, item.QuoteId)) : <Text >Не найдено</Text>}
       </View>
     </View>
   );
@@ -79,11 +81,10 @@ const styles = StyleSheet.create({
     width: '30%'
   },
   getStartedContainer: {
-    flex: 1,
     alignItems: 'center',
     marginHorizontal: 5,
     marginVertical: 20,
-    color: '#fff',
+    color: '#fff'
   },
   homeScreenFilename: {
     marginVertical: 7,
