@@ -17,13 +17,14 @@ export default function TopTabNavigator() {
 
   return (
     <TopTab.Navigator
-      initialRouteName="Favourites"
-      tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
+      initialRouteName="Browse"
+      tabBarOptions={{activeTintColor: Colors[colorScheme].tint }}>
+
       <TopTab.Screen
         name="Favourites"
         component={FavouritesNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+            tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
         }}
       />
       <TopTab.Screen

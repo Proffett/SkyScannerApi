@@ -6,8 +6,8 @@ import BrowseScreen from "./screens/BrowseScreen";
  */
 
 export type RootStackParamList = {
-  Root: undefined;
-  NotFound: undefined;
+  MainScreens: undefined;
+  FlightScreen: undefined;
 };
 
 export type TopTabParamList = {

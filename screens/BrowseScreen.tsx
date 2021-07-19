@@ -8,7 +8,7 @@ export default function BrowseScreen() {
   return (
       <ScrollView>
         <View style={styles.container}>
-          <BrowseScreenInfo path="/screens/BrowseScreen.tsx" />
+          <BrowseScreenInfo />
         </View>
       </ScrollView>
 
@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    color: '#fff',
   },
   title: {
     fontSize: 20,

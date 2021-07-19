@@ -4,6 +4,7 @@
  * https://reactnavigation.org/docs/configuring-links
  */
 import * as Linking from "expo-linking";
+import FlightScreen from "../screens/FlightScreen";
 
 export default {
   prefixes: [Linking.createURL("/")],
@@ -23,7 +24,7 @@ export default {
           },
         },
       },
-      NotFound: "*",
+      FlightScreen: "*",
     },
   },
 };
