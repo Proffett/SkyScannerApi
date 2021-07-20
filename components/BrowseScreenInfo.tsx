@@ -50,6 +50,7 @@ export default function BrowseScreenInfo() {
                   <View style={{ flexDirection: "row", justifyContent: "flex-start", alignItems: "center"}}>
                     <Text style={styles.routeText}>Moscow </Text>
                     <Image source={require("../assets/images/shortLine.png")} />
+                    <Image source={require("../assets/images/array2.png")} />
                     <Text style={styles.routeText}> New York</Text>
                   </View>
 
@@ -70,7 +71,7 @@ export default function BrowseScreenInfo() {
                 <Divider orientation="horizontal" style={{width: "100%", marginTop: 15}} />
 
                 <View style={{ position: "absolute", bottom: 13, right: 17, flexDirection: 'row', justifyContent: "flex-start", alignItems: "center"}}>
-                  <Text style={{fontSize: 11, color: "#6d6d6d", marginRight: 5}} >Price:</Text>
+                  <Text style={{fontSize: 11, color: "#6d6d6d", marginRight: 5, fontFamily: "SF-Pro"}} >Price:</Text>
                   <Text style={styles.routeText}>
                     {item.MinPrice.toString().slice(0, 2)} {item.MinPrice.toString().slice(2, 11)}
                   </Text>
@@ -105,6 +106,7 @@ const styles = StyleSheet.create({
   },
   routeDetails: {
     fontSize: 13,
+    fontFamily: "SF-Pro",
     color: "#6d6d6d"
   },
   itemContainer: {
