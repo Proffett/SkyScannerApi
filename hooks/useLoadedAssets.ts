@@ -10,19 +10,20 @@ export function useLoadedAssets() {
   React.useEffect(() => {
     async function loadResourcesAndDataAsync() {
       try {
-        SplashScreen.preventAutoHideAsync();
+        await SplashScreen.preventAutoHideAsync();
 
         // Load fonts
         await Font.loadAsync({
           ...Ionicons.font,
-          "space-mono": require("../assets/fonts/SpaceMono-Regular.ttf"),
+          "Abel": require("../assets/fonts/Abel-Regular.ttf"),
+          "SF-Pro": require("../assets/fonts/SFProDisplay-Regular.ttf")
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service
         console.warn(e);
       } finally {
         setLoadingComplete(true);
-        SplashScreen.hideAsync();
+        await SplashScreen.hideAsync();
       }
     }
 

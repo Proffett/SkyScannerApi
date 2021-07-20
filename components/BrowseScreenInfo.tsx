@@ -9,9 +9,9 @@ import {
   removeFavoriteCreator,
 } from "../redux/reducer";
 import {RootState} from "../redux/store";
-import {StackScreenProps} from "@react-navigation/stack";
-import {RootStackParamList} from "../types";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import {useNavigation} from "@react-navigation/native";
+import {faRubleSign} from "@fortawesome/free-solid-svg-icons";
 
 
 export default function BrowseScreenInfo() {
@@ -34,9 +34,7 @@ export default function BrowseScreenInfo() {
           <TouchableOpacity  onPress={() => navigation.navigate('FlightScreen',
               {id: id, price: item.MinPrice, date: item.QuoteDateTime  })}  key={id}>
 
-            <View style={{maxWidth: 335, maxHeight: 135, alignItems: "center", flexWrap: "wrap", flex: 1,
-              flexDirection: 'row',  padding: 19, marginBottom: 30, borderColor: '#eee',
-              borderStyle: "solid", borderWidth: 1, borderRadius: 6, elevation: 6}}>
+            <View style={styles.itemContainer}>
                 <View style={{position: "absolute", right: 13, top: 15}} >
                   <TouchableHighlight onPress={()=> touchFavorites(id)} >
                     {favorites.includes(id) ? <Image source={require("../assets/images/favorRed.png")} /> : <Image source={require("../assets/images/favor.png")} />}
@@ -49,13 +47,23 @@ export default function BrowseScreenInfo() {
                 </View>
 
                 <View>
-                  <Text style={{fontSize: 17}}>Moscow - New York</Text>
+                  <View style={{ flexDirection: "row", justifyContent: "flex-start", alignItems: "center"}}>
+                    <Text style={styles.routeText}>Moscow </Text>
+                    <Image source={require("../assets/images/shortLine.png")} />
+                    <Text style={styles.routeText}> New York</Text>
+                  </View>
 
-                  <Text style={{fontSize: 13,  color: "#6d6d6d"}} >VKO - {item.QuoteDateTime.slice(0, 10)} - {item.QuoteDateTime.slice(11, 16)}</Text>
-
+                  <View style={{ flexDirection: "row", justifyContent: "flex-start", alignItems: "center"}}>
+                    <Text style={styles.routeDetails} >VKO  </Text>
+                    <Image source={require("../assets/images/shortLine.png")} />
+                    <Text style={styles.routeDetails}>  {item.QuoteDateTime.slice(0, 10)}  </Text>
+                    <Image source={require("../assets/images/shortLine.png")} />
+                    <Text style={styles.routeDetails}>  {item.QuoteDateTime.slice(11, 16)}</Text>
+                  </View>
                   {/*show carrier*/}
                   {carriers && carriers.map((carrier) => {
-                    return (carrier.CarrierId == item.OutboundLeg.CarrierIds[0] ? <Text key={carrier.CarrierId}>{carrier.Name}</Text> : null)
+                    return (carrier.CarrierId == item.OutboundLeg.CarrierIds[0] ?
+                        <Text style={styles.routeDetails} key={carrier.CarrierId}>{carrier.Name}</Text> : null)
                   })}
                 </View>
 
@@ -63,9 +71,10 @@ export default function BrowseScreenInfo() {
 
                 <View style={{ position: "absolute", bottom: 13, right: 17, flexDirection: 'row', justifyContent: "flex-start", alignItems: "center"}}>
                   <Text style={{fontSize: 11, color: "#6d6d6d", marginRight: 5}} >Price:</Text>
-                  <Text style={{fontSize: 17}}>
-                    {item.MinPrice.toString().slice(0, 2)} {item.MinPrice.toString().slice(2, 11)} P
+                  <Text style={styles.routeText}>
+                    {item.MinPrice.toString().slice(0, 2)} {item.MinPrice.toString().slice(2, 11)}
                   </Text>
+                  <FontAwesomeIcon icon={faRubleSign} size={14}  />
                 </View>
             </View>
           </TouchableOpacity>
@@ -94,8 +103,31 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
+  routeDetails: {
+    fontSize: 13,
+    color: "#6d6d6d"
+  },
+  itemContainer: {
+    maxWidth: 335,
+    maxHeight: 135,
+    alignItems: "center",
+    flexWrap: "wrap",
+    flex: 1,
+    flexDirection: 'row',
+    padding: 19,
+    marginBottom: 30,
+    borderColor: '#eee',
+    borderStyle: "solid",
+    borderWidth: 1,
+    borderRadius: 6,
+    elevation: 6
+  },
   columnLeft: {
     width: '30%'
+  },
+  routeText: {
+    fontFamily: 'Abel',
+    fontSize: 17
   },
   getStartedContainer: {
     alignItems: 'center',
@@ -125,11 +157,6 @@ const styles = StyleSheet.create({
   },
   helpLinkText: {
     textAlign: 'center',
-  },
-  item: {
-    backgroundColor: "#f9c2ff",
-    padding: 20,
-    marginVertical: 8
   },
   title: {
     fontSize: 24

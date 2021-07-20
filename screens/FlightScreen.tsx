@@ -5,6 +5,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../redux/store";
 import {addFavoritesCreator, removeFavoriteCreator} from "../redux/reducer";
 import {Divider} from "react-native-elements";
+import {faRubleSign} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
 
 
 export default function FlightScreen({navigation ,route}) {
@@ -50,9 +52,14 @@ export default function FlightScreen({navigation ,route}) {
             <Text style={styles.smallTextWhite}>Price</Text>
             <Text style={styles.smallTextWhite}>Boarding</Text>
           </View>
+
           <Image style={{position: "absolute"}} source={require("../assets/images/line.png")} />
+
           <View style={styles.flightDetails}>
-            <Text style={styles.bigTextWhite}>{price.toString().slice(0, 2)} {price.toString().slice(2, 10)} Р</Text>
+            <Text style={styles.bigTextWhite}>{price.toString().slice(0, 2)} {price.toString().slice(2, 10)}
+              <FontAwesomeIcon icon={faRubleSign} size={14} style={{color: "#fff"}}  />
+            </Text>
+
             <Text style={styles.bigTextWhite}>19:20</Text>
           </View>
         </View>
@@ -121,7 +128,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 36,
-    fontWeight: '100',
+    fontWeight: '400',
+    fontFamily: 'Abel'
   },
   smallText: {
     fontSize: 13,
@@ -131,13 +139,14 @@ const styles = StyleSheet.create({
 
   smallTextWhite: {
     fontSize: 13,
-    fontWeight: '100',
-    color: "#fff"
+    fontWeight: '400',
+    color: "#fff",
   },
   bigTextWhite: {
     fontSize: 20,
-    fontWeight: '100',
-    color: "#fff"
+    fontWeight: '400',
+    color: "#fff",
+    fontFamily: 'Abel'
   },
   link: {
     marginTop: 15,
