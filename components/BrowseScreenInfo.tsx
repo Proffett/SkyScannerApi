@@ -12,6 +12,7 @@ import {RootState} from "../redux/store";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import {useNavigation} from "@react-navigation/native";
 import {faRubleSign} from "@fortawesome/free-solid-svg-icons";
+import {MONTH} from "../constants/other";
 
 
 export default function BrowseScreenInfo() {
@@ -23,11 +24,6 @@ export default function BrowseScreenInfo() {
   useEffect(() => {
     dispatch(fetchAsyncFlightsCreator())
   }, [dispatch]);
-
-  // const getDay = new Date()
-  // const date = getDay.getFullYear() + '-' + '0'+(getDay.getMonth()+1) + '-' + getDay.getDate()
-  let data = []
-  let newData = []
 
   const renderFlights = (item, id) => {
       return(
@@ -57,7 +53,9 @@ export default function BrowseScreenInfo() {
                   <View style={{ flexDirection: "row", justifyContent: "flex-start", alignItems: "center"}}>
                     <Text style={styles.routeDetails} >VKO  </Text>
                     <Image source={require("../assets/images/shortLine.png")} />
-                    <Text style={styles.routeDetails}>  {item.QuoteDateTime.slice(0, 10)}  </Text>
+                    <Text style={styles.routeDetails}>  {item.QuoteDateTime.slice(8, 10)}  </Text>
+                    <Text style={styles.routeDetails}>{MONTH[item.QuoteDateTime.slice(5, 7)]}, </Text>
+                    <Text style={styles.routeDetails}>  {item.QuoteDateTime.slice(0, 4)}  </Text>
                     <Image source={require("../assets/images/shortLine.png")} />
                     <Text style={styles.routeDetails}>  {item.QuoteDateTime.slice(11, 16)}</Text>
                   </View>

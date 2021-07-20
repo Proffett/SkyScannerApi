@@ -4,9 +4,9 @@ import CarouselDetailFlight from "../components/Carousel";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../redux/store";
 import {addFavoritesCreator, removeFavoriteCreator} from "../redux/reducer";
-import {Divider} from "react-native-elements";
 import {faRubleSign} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
+import {MONTH} from "../constants/other";
 
 
 export default function FlightScreen({navigation ,route}) {
@@ -31,7 +31,7 @@ export default function FlightScreen({navigation ,route}) {
         </View>
 
         <View style={styles.flightDetails}>
-          <Text style={styles.smallText}>{date.slice(0, 10)}</Text>
+          <Text style={styles.smallText}>{date.slice(8, 10)} {MONTH[date.slice(5, 7)]}, {date.slice(0, 4)}</Text>
           <Text style={styles.smallText}>{date.slice(11, 16)}</Text>
         </View>
 
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   },
   favorite: {
     position: "absolute",
-    right: 23,
+    right: 25,
     top: 25
   },
   title: {
@@ -133,13 +133,15 @@ const styles = StyleSheet.create({
   },
   smallText: {
     fontSize: 13,
-    fontWeight: '100',
+    fontWeight: '400',
+    fontFamily: "SF-Pro",
     color: "#878787"
   },
 
   smallTextWhite: {
     fontSize: 13,
     fontWeight: '400',
+    fontFamily: "SF-Pro",
     color: "#fff",
   },
   bigTextWhite: {

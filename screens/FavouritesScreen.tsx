@@ -8,11 +8,7 @@ export default function FavouritesScreen() {
   return (
       <ScrollView>
         <View style={styles.container}>
-
-          <TouchableOpacity>
             <FavoritesScreenInfo path="/screens/FavouritesScreen.tsx" />
-          </TouchableOpacity>
-
         </View>
       </ScrollView>
   );

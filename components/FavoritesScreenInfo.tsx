@@ -8,6 +8,7 @@ import {RootState} from "../redux/store";
 import {useNavigation} from "@react-navigation/native";
 import {faRubleSign} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
+import {MONTH} from "../constants/other";
 
 
 export default function FavoritesScreenInfo({ path }: { path: string }) {
@@ -47,7 +48,9 @@ export default function FavoritesScreenInfo({ path }: { path: string }) {
                 <View style={{ flexDirection: "row", justifyContent: "flex-start", alignItems: "center"}}>
                   <Text style={styles.routeDetails} >VKO  </Text>
                   <Image source={require("../assets/images/shortLine.png")} />
-                  <Text style={styles.routeDetails}>  {item.QuoteDateTime.slice(0, 10)}  </Text>
+                  <Text style={styles.routeDetails}>  {item.QuoteDateTime.slice(8, 10)}  </Text>
+                  <Text style={styles.routeDetails}>{MONTH[item.QuoteDateTime.slice(5, 7)]}, </Text>
+                  <Text style={styles.routeDetails}>  {item.QuoteDateTime.slice(0, 4)}  </Text>
                   <Image source={require("../assets/images/shortLine.png")} />
                   <Text style={styles.routeDetails}>  {item.QuoteDateTime.slice(11, 16)}</Text>
                 </View>

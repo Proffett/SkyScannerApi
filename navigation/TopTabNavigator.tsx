@@ -8,6 +8,7 @@ import FavouritesScreen from '../screens/FavouritesScreen';
 import BrowseScreen from '../screens/BrowseScreen';
 import {BrowseParamList, FavouritesParamList, TopTabParamList} from '../types';
 import {createMaterialTopTabNavigator} from "@react-navigation/material-top-tabs";
+import {Text, View} from "react-native";
 
 
 const TopTab = createMaterialTopTabNavigator<TopTabParamList>();
@@ -16,25 +17,24 @@ export default function TopTabNavigator() {
   const colorScheme = useColorScheme();
 
   return (
-    <TopTab.Navigator
-      initialRouteName="Browse"
-      tabBarOptions={{activeTintColor: Colors[colorScheme].tint }}>
-
-      <TopTab.Screen
-        name="Favourites"
-        component={FavouritesNavigator}
-        options={{
-            tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
-        }}
-      />
-      <TopTab.Screen
-        name="Browse"
-        component={BrowseNavigator}
-        options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
-        }}
-      />
-    </TopTab.Navigator>
+          <TopTab.Navigator
+              initialRouteName="Browse"
+              tabBarOptions={{activeTintColor: Colors[colorScheme].tint }}>
+              <TopTab.Screen
+                  name="Favourites"
+                  component={FavouritesNavigator}
+                  options={{
+                      tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+                  }}
+              />
+              <TopTab.Screen
+                  name="Browse"
+                  component={BrowseNavigator}
+                  options={{
+                      tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+                  }}
+              />
+          </TopTab.Navigator>
   );
 }
 

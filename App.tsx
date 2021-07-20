@@ -21,7 +21,6 @@ export default function App() {
     return (
         <Provider store={store}>
                   <SafeAreaProvider>
-                    <Text style={{position:"relative", textAlign: 'center', marginTop: 45}} >Flights</Text>
                     <Navigation colorScheme={colorScheme} />
                   </SafeAreaProvider>
         </Provider>
