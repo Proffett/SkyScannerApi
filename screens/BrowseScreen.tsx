@@ -17,10 +17,9 @@ export default function BrowseScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    color: '#fff',
+    marginVertical: 20,
   },
   title: {
     fontSize: 20,

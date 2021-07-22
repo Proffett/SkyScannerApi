@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import { Image, StyleSheet, TouchableHighlight, TouchableOpacity} from 'react-native';
+import {Image, StyleSheet, TouchableHighlight, TouchableOpacity, useWindowDimensions} from 'react-native';
 import { Divider } from 'react-native-elements';
 import { Text, View } from './Themed';
 import {useDispatch, useSelector} from "react-redux";
@@ -13,6 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import {useNavigation} from "@react-navigation/native";
 import {faRubleSign} from "@fortawesome/free-solid-svg-icons";
 import {MONTH} from "../constants/other";
+import Loader from "./Loader";
 
 
 export default function BrowseScreenInfo() {
@@ -20,38 +21,43 @@ export default function BrowseScreenInfo() {
   const flights = useSelector((state: RootState) => state.flights)
   const carriers = useSelector((state: RootState) => state.carriers)
   const favorites = useSelector((state: RootState) => state.favorites)
+
+  const deviceWidth = useWindowDimensions().width;
+
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(fetchAsyncFlightsCreator())
   }, [dispatch]);
 
-  const renderFlights = (item, id) => {
+  const renderFlightsItem = (item, id) => {
       return(
           <TouchableOpacity  onPress={() => navigation.navigate('FlightScreen',
               {id: id, price: item.MinPrice, date: item.QuoteDateTime  })}  key={id}>
 
-            <View style={styles.itemContainer}>
-                <View style={{position: "absolute", right: 13, top: 15}} >
+            <View style={{...styles.itemContainer, width: deviceWidth - 40}}>
+                <View style={{position: "absolute", right: 13, top: 15, zIndex: 10}} >
                   <TouchableHighlight onPress={()=> touchFavorites(id)} >
-                    {favorites.includes(id) ? <Image source={require("../assets/images/favorRed.png")} /> : <Image source={require("../assets/images/favor.png")} />}
+                    {favorites.includes(id)
+                        ? <Image source={require("../assets/images/favorRed.png")} />
+                        : <Image source={require("../assets/images/favor.png")} />}
                   </TouchableHighlight>
                 </View>
 
-                <View style={{marginRight: 30}}>
+                <View style={{position: "relative", top: -19, zIndex: 10, width: 70}}>
                   <Image style={{position: "relative"}} source={require("../assets/images/Ellipse.png")} />
                   <Image style={{position: "absolute", zIndex: 1, left: 15, top: 12}} source={require("../assets/images/Vector.png")} />
                 </View>
 
                 <View>
-                  <View style={{ flexDirection: "row", justifyContent: "flex-start", alignItems: "center"}}>
+                  <View style={styles.flexDetails}>
                     <Text style={styles.routeText}>Moscow </Text>
                     <Image source={require("../assets/images/shortLine.png")} />
                     <Image source={require("../assets/images/array2.png")} />
                     <Text style={styles.routeText}> New York</Text>
                   </View>
 
-                  <View style={{ flexDirection: "row", justifyContent: "flex-start", alignItems: "center"}}>
-                    <Text style={styles.routeDetails} >VKO  </Text>
+                  <View style={styles.flexDetails}>
+                    <Text style={styles.routeDetails} >SVO  </Text>
                     <Image source={require("../assets/images/shortLine.png")} />
                     <Text style={styles.routeDetails}>  {item.QuoteDateTime.slice(8, 10)}  </Text>
                     <Text style={styles.routeDetails}>{MONTH[item.QuoteDateTime.slice(5, 7)]}, </Text>
@@ -59,22 +65,28 @@ export default function BrowseScreenInfo() {
                     <Image source={require("../assets/images/shortLine.png")} />
                     <Text style={styles.routeDetails}>  {item.QuoteDateTime.slice(11, 16)}</Text>
                   </View>
+
                   {/*show carrier*/}
                   {carriers && carriers.map((carrier) => {
                     return (carrier.CarrierId == item.OutboundLeg.CarrierIds[0] ?
-                        <Text style={styles.routeDetails} key={carrier.CarrierId}>{carrier.Name}</Text> : null)
+                        <View style={styles.flexDetails} key={carrier.CarrierId}>
+                          <Text style={styles.routeDetails} >
+                            {carrier.Name}
+                          </Text></View> : null)
                   })}
-                </View>
 
-                <Divider orientation="horizontal" style={{width: "100%", marginTop: 15}} />
+              <Divider orientation="horizontal" style={{width: "100%", marginVertical: 10, height: 3}} />
 
-                <View style={{ position: "absolute", bottom: 13, right: 17, flexDirection: 'row', justifyContent: "flex-start", alignItems: "center"}}>
+                <View style={{...styles.flexDetails, justifyContent: "flex-end"}}>
                   <Text style={{fontSize: 11, color: "#6d6d6d", marginRight: 5, fontFamily: "SF-Pro"}} >Price:</Text>
                   <Text style={styles.routeText}>
                     {item.MinPrice.toString().slice(0, 2)} {item.MinPrice.toString().slice(2, 11)}
                   </Text>
                   <FontAwesomeIcon icon={faRubleSign} size={14}  />
                 </View>
+
+              </View>
+
             </View>
           </TouchableOpacity>
       )
@@ -89,7 +101,7 @@ export default function BrowseScreenInfo() {
   return (
     <View>
       <View style={styles.getStartedContainer}>
-          {flights ? flights.map((item) => renderFlights(item, item.QuoteId)) : <Text>Не найдено</Text>}
+          {flights.length !== 0 ? flights.map((item) => renderFlightsItem(item, item.QuoteId)) : <Loader/>}
       </View>
     </View>
   );
@@ -100,7 +112,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
-    flexWrap: 'wrap',
+  },
+  flexDetails: {
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center"
   },
   routeDetails: {
     fontSize: 13,
@@ -108,19 +124,18 @@ const styles = StyleSheet.create({
     color: "#6d6d6d"
   },
   itemContainer: {
-    maxWidth: 335,
-    maxHeight: 135,
+    maxHeight: 145,
+    justifyContent: 'center',
     alignItems: "center",
-    flexWrap: "wrap",
     flex: 1,
     flexDirection: 'row',
-    padding: 19,
+    padding: 20,
     marginBottom: 30,
     borderColor: '#eee',
     borderStyle: "solid",
     borderWidth: 1,
     borderRadius: 6,
-    elevation: 6
+    elevation: 6,
   },
   columnLeft: {
     width: '30%'
@@ -131,8 +146,7 @@ const styles = StyleSheet.create({
   },
   getStartedContainer: {
     alignItems: 'center',
-    marginHorizontal: 5,
-    marginVertical: 20,
+    marginHorizontal: 20,
     color: '#fff'
   },
   homeScreenFilename: {
@@ -162,3 +176,5 @@ const styles = StyleSheet.create({
     fontSize: 24
   }
 });
+
+

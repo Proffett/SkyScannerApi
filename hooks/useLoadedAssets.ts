@@ -2,16 +2,16 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import * as Font from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import * as React from "react";
+import {fetchAsyncFlightsCreator} from "../redux/reducer";
+import {useDispatch} from "react-redux";
 
 export function useLoadedAssets() {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
-
   // Load any resources or data that we need prior to rendering the app
   React.useEffect(() => {
     async function loadResourcesAndDataAsync() {
       try {
         await SplashScreen.preventAutoHideAsync();
-
         // Load fonts
         await Font.loadAsync({
           ...Ionicons.font,

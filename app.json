@@ -19,7 +19,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.proffett.skyscannerclone"
     },
     "android": {
       "adaptiveIcon": {
