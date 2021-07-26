@@ -8,6 +8,7 @@ import FavouritesScreen from '../screens/FavouritesScreen';
 import BrowseScreen from '../screens/BrowseScreen';
 import {BrowseParamList, FavouritesParamList, TopTabParamList} from '../types';
 import {createMaterialTopTabNavigator} from "@react-navigation/material-top-tabs";
+import {Text, View} from "react-native";
 
 
 const TopTab = createMaterialTopTabNavigator<TopTabParamList>();
@@ -15,7 +16,6 @@ const TopTab = createMaterialTopTabNavigator<TopTabParamList>();
 export default function TopTabNavigator() {
 
     const colorScheme = useColorScheme();
-    console.log(colorScheme)
 
       return (
               <TopTab.Navigator

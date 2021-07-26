@@ -3,16 +3,21 @@ import {Image, StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import CarouselDetailFlight from "../components/Carousel";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../redux/store";
-import {addFavoritesCreator, removeFavoriteCreator} from "../redux/reducer";
+import {addFavoritesCreator, removeFavoriteCreator, setFlightScreen} from "../redux/reducer";
 import {faRubleSign} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
-import {MONTH} from "../constants/other";
+import {MONTH} from "../constants/Other";
+import {useEffect} from "react";
 
 
 export default function FlightScreen({navigation ,route}) {
   const { id, price, date } = route.params;
   const favorites = useSelector((state: RootState) => state.favorites)
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(setFlightScreen(true))
+  }, [dispatch])
 
   const touchFavorites = (id) => {
     if (favorites.includes(id)) {
@@ -60,7 +65,7 @@ export default function FlightScreen({navigation ,route}) {
               <FontAwesomeIcon icon={faRubleSign} size={14} style={{color: "#fff"}}  />
             </Text>
 
-            <Text style={styles.bigTextWhite}>19:20</Text>
+            <Text style={styles.bigTextWhite}>{date.slice(11, 16)}</Text>
           </View>
         </View>
 
@@ -112,11 +117,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "94%",
     padding: 0,
-    bottom: 0,
+    bottom: 12,
     marginBottom: 5,
     backgroundColor: "#1157A7",
     borderRadius: 10,
-    height: 75,
+    height: 55,
     zIndex: 5,
     position: "absolute",
     elevation: 7
@@ -162,7 +167,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection:'row',
     justifyContent: 'center',
-    zIndex: 2
+    marginTop: 60,
+    zIndex: 4
   }
 
 });

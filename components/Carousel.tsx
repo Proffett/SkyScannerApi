@@ -49,7 +49,7 @@ export default class CarouselDetailFlight extends React.Component {
                         sliderWidth={139}
                         itemWidth={139}
                         loop
-                        containerCustomStyle={{marginTop: 20, marginLeft: 30, marginBottom: 15, width: 600}}
+                        containerCustomStyle={{marginTop: 10, marginLeft: 30, marginBottom: 10,height: 200, width: 600}}
                         firstItem={0}
                         inactiveSlideScale={1}
                         inactiveSlideOpacity={100}
@@ -64,6 +64,7 @@ export default class CarouselDetailFlight extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        bottom: 0
     },
     imageContainer: {
         flex: 1,

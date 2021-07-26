@@ -1,19 +1,19 @@
 import * as React from 'react';
-import {ScrollView, StyleSheet} from 'react-native';
+import {ScrollView, StyleSheet, Text} from 'react-native';
 
-import BrowseScreenInfo from '../components/BrowseScreenInfo';
+import BrowseFlightsInfo from '../components/BrowseFlightsInfo';
 import { View } from '../components/Themed';
 
 export default function BrowseScreen() {
   return (
-      <ScrollView>
-        <View style={styles.container}>
-          <BrowseScreenInfo />
-        </View>
-      </ScrollView>
-
+          <ScrollView>
+              <View style={styles.container}>
+                  <BrowseFlightsInfo isFavorite={false} />
+              </View>
+          </ScrollView>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -24,10 +24,5 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
   },
 });

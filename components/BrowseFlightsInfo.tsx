@@ -6,28 +6,40 @@ import {useDispatch, useSelector} from "react-redux";
 import {
   addFavoritesCreator,
   fetchAsyncFlightsCreator,
-  removeFavoriteCreator,
+  removeFavoriteCreator, setFlightScreen,
 } from "../redux/reducer";
 import {RootState} from "../redux/store";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import {useNavigation} from "@react-navigation/native";
 import {faRubleSign} from "@fortawesome/free-solid-svg-icons";
-import {MONTH} from "../constants/other";
+import {MONTH} from "../constants/Other";
 import Loader from "./Loader";
 
 
-export default function BrowseScreenInfo() {
+export default function BrowseFlightsInfo({isFavorite}) {
   const navigation = useNavigation();
   const flights = useSelector((state: RootState) => state.flights)
   const carriers = useSelector((state: RootState) => state.carriers)
   const favorites = useSelector((state: RootState) => state.favorites)
+  const favoritesFlights = useSelector((state: RootState) => state.favoritesFlights)
 
   const deviceWidth = useWindowDimensions().width;
 
   const dispatch = useDispatch()
+
   useEffect(() => {
-    dispatch(fetchAsyncFlightsCreator())
+    dispatch(fetchAsyncFlightsCreator());
+    dispatch(setFlightScreen(false))
   }, [dispatch]);
+
+
+  const touchFavorites = (id) => {
+    if (favorites.includes(id)) {
+      dispatch(removeFavoriteCreator(id))
+    } else if (!isFavorite) {
+      dispatch(addFavoritesCreator(id))
+    }
+  }
 
   const renderFlightsItem = (item, id) => {
       return(
@@ -35,7 +47,8 @@ export default function BrowseScreenInfo() {
               {id: id, price: item.MinPrice, date: item.QuoteDateTime  })}  key={id}>
 
             <View style={{...styles.itemContainer, width: deviceWidth - 40}}>
-                <View style={{position: "absolute", right: 13, top: 15, zIndex: 10}} >
+
+              <View style={{position: "absolute", right: 13, top: 15, zIndex: 10}} >
                   <TouchableHighlight onPress={()=> touchFavorites(id)} >
                     {favorites.includes(id)
                         ? <Image source={require("../assets/images/favorRed.png")} />
@@ -74,35 +87,40 @@ export default function BrowseScreenInfo() {
                             {carrier.Name}
                           </Text></View> : null)
                   })}
+                  <Divider orientation="horizontal" style={{width: "100%", marginVertical: 10, height: 3}} />
 
-              <Divider orientation="horizontal" style={{width: "100%", marginVertical: 10, height: 3}} />
-
-                <View style={{...styles.flexDetails, justifyContent: "flex-end"}}>
-                  <Text style={{fontSize: 11, color: "#6d6d6d", marginRight: 5, fontFamily: "SF-Pro"}} >Price:</Text>
-                  <Text style={styles.routeText}>
-                    {item.MinPrice.toString().slice(0, 2)} {item.MinPrice.toString().slice(2, 11)}
-                  </Text>
-                  <FontAwesomeIcon icon={faRubleSign} size={14}  />
-                </View>
+                  <View style={{...styles.flexDetails, justifyContent: "flex-end"}}>
+                    <Text style={{fontSize: 11, color: "#6d6d6d", marginRight: 5, fontFamily: "SF-Pro"}} >Price:</Text>
+                    <Text style={styles.routeText}>
+                      {item.MinPrice.toString().slice(0, 2)} {item.MinPrice.toString().slice(2, 11)}
+                    </Text>
+                    <FontAwesomeIcon icon={faRubleSign} size={14}  />
+                  </View>
 
               </View>
 
+
             </View>
+
           </TouchableOpacity>
       )
   }
 
-  const touchFavorites = (id) => {
-    if (favorites.includes(id)) {
-      dispatch(removeFavoriteCreator(id))
-    } else dispatch(addFavoritesCreator(id))
-  }
+
 
   return (
     <View>
-      <View style={styles.getStartedContainer}>
-          {flights.length !== 0 ? flights.map((item) => renderFlightsItem(item, item.QuoteId)) : <Loader/>}
-      </View>
+        {isFavorite
+            ? (
+                <View style={styles.getStartedContainer}>
+                  {favoritesFlights ? favoritesFlights.map((item) => renderFlightsItem(item, item.QuoteId)) : <Text >Не найдено</Text>}
+                </View>
+            ) : (
+                <View style={styles.getStartedContainer}>
+                  {flights.length !== 0 ? flights.map((item) => renderFlightsItem(item, item.QuoteId)) : <Loader/>}
+                </View>
+            )
+        }
     </View>
   );
 }
