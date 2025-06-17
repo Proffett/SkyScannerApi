@@ -259,7 +259,7 @@ This project is licensed under the MIT License. See [LICENSE](LICENSE) for detai
 
 **Evgeny Sterkhov**
 - GitHub: [@Proffett](https://github.com/Proffett)
-- Email: evgeny.profet@gmail.com
+- Email: montana-work@yandex.ru
 - Telegram: @proffett
 
 ## 🙏 Acknowledgments
